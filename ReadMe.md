@@ -16,3 +16,10 @@ kubectl get all
 
 to access app on minikube
 minikube service mylb
+
+
+
+to run workflow just commmit to github
+git add .
+git commit -m "updated the main code a little"
+git push origin main
