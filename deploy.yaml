@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: gpt-deploy
 spec:
-  replicas:3
+  replicas: 3
   selector:
     matchLabels:
       app: gpt-pod
@@ -11,24 +11,25 @@ spec:
     metadata:
       labels:
         app: gpt-pod
-      spec:
-        containers:
-        - name: gptcontainer
-          image: gcr.io/PROJECT_ID/IMAGE:TAG
-          ports:
-          - containerPort: 80
-
+    spec:
+      containers:
+      - name: gptcontainer
+        image: my-app:latest   # <-- use your Minikube image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name:mylb
+  name: mylb
 spec:
-  type:LoadBalancer
+  type: NodePort              # <-- NodePort works in Minikube
   selector:
     app: gpt-pod
   ports:
-  - port:80
-    targetport: 80
+    - port: 80
+      targetPort: 80
+      nodePort: 30007

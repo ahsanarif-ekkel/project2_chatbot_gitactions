@@ -1,13 +1,13 @@
-from turtle import title
+# from turtle import title
 from transformers import pipeline
 from fastapi import FastAPI
-from fastapi.response import HTMLResponse
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import uvicorn
 
 
 # use huggingface pipeline to use model
-generator = pipeline('text-generator',model='gpt2')
+generator = pipeline('text-generation',model='gpt2')
 
 # define fastapi
 app = FastAPI(
@@ -25,8 +25,8 @@ class Body(BaseModel):
 
 @app.get('/')
 def index():
-    return HTMLResponse("<h1> WELCOME TO LLMOPS COURSE WITH GP2 MODEL </h1>")
-
+    # return HTMLResponse("<h1> WELCOME TO LLMOPS COURSE WITH GP2 MODEL </h1>")
+    return "This is index changed response."
 @app.post('/generate')
 def predict(body:Body):
     results = generator(body.text,max_length=350,num_return_sequence=1)

@@ -1,4 +1,10 @@
+# transformers==4.37.0
+# tensorflow
+# fastapi
+# uvicorn[standard]
+
+fastapi==0.135.2
+uvicorn==0.42.0
 transformers==4.37.0
-tensorflow==2.19.0
-fastapi
-uvicorn[standard]
+torch==2.11.0   # or tensorflow if using TF backend
+pydantic==2.12.5
