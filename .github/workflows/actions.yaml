@@ -19,10 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Build Docker image
-      - name: Build Docker image
+      - name: Build Docker image inside Minikube
         run: |
-          docker build -t $IMAGE:$GITHUB_SHA .
+          # Switch Docker to Minikube daemon
+          eval $(minikube -p minikube docker-env)
+
+          # Build the image so Minikube can use it
+          docker build -t my-app:$GITHUB_SHA .
+      # Step 2: Build Docker image
+      # - name: Build Docker image
+      #   run: |
+      #     docker build -t $IMAGE:$GITHUB_SHA .
 
       # Step 3: Set up kubectl
       - name: Set up kubectl
